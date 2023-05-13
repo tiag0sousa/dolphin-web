@@ -1,0 +1,31 @@
+@keyframes bubble {
+  0%, 80%, 100% {
+    transform: scale(0.1);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.typing-indicator {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.typing-indicator div {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin: 0 2.5px;
+  animation: bubble 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator div:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-indicator div:nth-child(2) {
+  animation-delay: -0.16s;
+}
