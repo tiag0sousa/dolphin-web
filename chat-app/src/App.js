@@ -1,14 +1,14 @@
+import React, { useState } from 'react';
 import './App.css';
-import ChatContainer from './Components/ChatContainer';
-import ChatMenu from './Components/ChatMenu';
+import { ThemeProvider } from './Theme/ThemeProvider';
+import RootComponent from './Components/RootComponent';
 
 function App() {
 
   return (
-    <div style={{ display: "flex" }}>
-      <ChatMenu/>
-      <ChatContainer/>
-    </div>
+    <ThemeProvider>
+      <RootComponent />
+    </ThemeProvider>
   );
 }
 

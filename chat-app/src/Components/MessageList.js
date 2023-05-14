@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const MessageList = ({ messages }) => {
-    
+
     const classes = useStyles();
 
     return (

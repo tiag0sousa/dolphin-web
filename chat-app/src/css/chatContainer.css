@@ -1,0 +1,14 @@
+.chatContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: calc(100vh - 110px);
+    background: white;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.chatContainer.dark {
+
+    background: #3e3e42;
+}

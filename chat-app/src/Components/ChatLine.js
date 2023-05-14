@@ -14,41 +14,17 @@ const useStyles = makeStyles({
   cardLeft: {
     marginLeft: '10px',
     marginRight: '10px',
-    backgroundColor: 'black',
+    backgroundColor: '#222',
     color: 'white',
     borderRadius: '20px',
-    position: 'relative',
-    '&:before': {
-      content: '""',
-      width: '0px',
-      height: '0px',
-      position: 'absolute',
-      borderLeft: '15px solid transparent',
-      borderRight: '15px solid black',
-      borderTop: '15px solid black',
-      borderBottom: '0px solid transparent',
-      left: '-15px',
-      top: '10px',
-    }
+    position: 'relative'
   },
   cardRight: {
     marginLeft: '10px',
     marginRight: '10px',
-    backgroundColor: 'gray',
+    backgroundColor: '#c2c4c9',
     borderRadius: '20px',
-    position: 'relative',
-    '&:after': {
-      content: '""',
-      width: '0px',
-      height: '0px',
-      position: 'absolute',
-      borderLeft: '15px solid gray',
-      borderRight: '15px solid transparent',
-      borderTop: '15px solid gray',
-      borderBottom: '0px solid transparent',
-      right: '-15px',
-      top: '10px',
-    }
+    position: 'relative'
   }
 });
 
@@ -66,7 +42,7 @@ const ChatLine = ({ user, message, alignRight, isTyping }) => {
         <CardContent style={{ paddingBottom: '16px' }}>
           
             {!isTyping && 
-                <Typography variant="body1">
+                <Typography variant="body2">
                     { message }
                 </Typography>
             }

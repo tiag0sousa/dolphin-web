@@ -24,7 +24,18 @@ app.post('/chat/stable', async (req, res) => {
 });
 
 app.post('/chat/exploratory', async (req, res) => {
-    
+  
+  try {
+
+    const response = await axios
+        .post('http://34.173.31.157:8001/v1/chat', req.body);
+
+    res.send(response.data);
+
+} catch (error) {
+    console.error(error);
+    res.status(500).send('Error accessing external API -> ChatAPI exploratory');
+  }
 });
 
 app.post('/searchProducts', async (req, res) => {

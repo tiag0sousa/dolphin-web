@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ChatInput from './ChatInput';
 import MessageList from './MessageList';
-import { makeStyles } from '@material-ui/core/styles';
 import { sendMessage } from '../API/chatAPI';
 import { searchProducts } from '../API/ECAPI';
 import MessageType from '../Models/MessageType';
+import ffLogo from '../Assets/ff_logo.png';
+import '../css/chatContainer.css';
+import { ThemeContext } from '../Theme/ThemeProvider';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flex: 1,
-        flexDirection: 'column',
-        height: '100vh'
-    }
-}));
+const ChatContainer = ({ chatMessages, currentServer, handleAddMessage, handleHideTyping }) => {
 
-const ChatContainer = () => {
+    const currentMessages = chatMessages[currentServer].messages
 
     const [text, setText] = useState('');
-    const [messages, setMessages] = useState([]);
-
-    const classes = useStyles();
+    const { darkMode } = useContext(ThemeContext);
 
     const fetchProducts = async(productIds) => {
 
@@ -29,33 +22,30 @@ const ChatContainer = () => {
             type: MessageType.TEXT,
             user: {
                 name: "FF",
-                avatarUrl: 'https://play-lh.googleusercontent.com/K7ZtNUsaBydbZXFUYjpvf54KCxC3WyNPw4hs59ktYl5_KrgJB24IKX2hWe2St30J1A'
+                avatarUrl: ffLogo
             },
-            message: text,
+            message: "is typing...",
             alignRight: false,
             isTyping: true
          }
 
-         setMessages(prevMessages => [...prevMessages, typingMessage]);
+         handleAddMessage(typingMessage)
 
-        // ------------ DEBUG ------------
         const result = await searchProducts(productIds)
-        console.log("⬇️ " + JSON.stringify(result))
-        // ------------------------------------
 
         // Hide is typing:
-        setMessages(prevMessages => prevMessages.filter(message => !message.isTyping));
+        handleHideTyping()
 
         let message = {
             type: MessageType.PRODUCTS,
             user: {
                 name: "FF",
-                avatarUrl: 'https://play-lh.googleusercontent.com/K7ZtNUsaBydbZXFUYjpvf54KCxC3WyNPw4hs59ktYl5_KrgJB24IKX2hWe2St30J1A'
+                avatarUrl: ffLogo
             },
             products: result.products.entries
         }
-            
-        setMessages(prevMessages => [...prevMessages, message]);
+
+        handleAddMessage(message)
     };
 
     const fetchData = async (textMessage) => {
@@ -66,28 +56,23 @@ const ChatContainer = () => {
                 sessionId: "123456"
             }
 
-          // ------------ DEBUG ------------
-          console.log("🚀 " + JSON.stringify(data))
-          const result = await sendMessage(data);
-          console.log("⬇️ " + JSON.stringify(result))
-          // ------------------------------------
+          const result = await sendMessage(data, currentServer);
 
           // Hide isTyping:
-          setMessages(prevMessages => prevMessages.filter(message => !message.isTyping));
+          handleHideTyping()
 
-          // TODO: add message
+          // Add message
           let message = {
             type: MessageType.TEXT,
             user: {
                 name: "FF",
-                avatarUrl: 'https://play-lh.googleusercontent.com/K7ZtNUsaBydbZXFUYjpvf54KCxC3WyNPw4hs59ktYl5_KrgJB24IKX2hWe2St30J1A'
+                avatarUrl: ffLogo
             },
             message: result.message,
             alignRight: false,
             isTyping: false
             }
-            setMessages(prevMessages => [...prevMessages, message]);
-
+            handleAddMessage(message)
 
           if (result.productIds !== undefined) {
 
@@ -118,29 +103,30 @@ const ChatContainer = () => {
             isTyping: false
         }
 
-        setMessages(prevMessages => [...prevMessages, message]);
+        // Add message:
+        handleAddMessage(message)
 
         // Add typing:
         let typingMessage = { 
             type: MessageType.TEXT,
             user: {
                 name: "FF",
-                avatarUrl: 'https://play-lh.googleusercontent.com/K7ZtNUsaBydbZXFUYjpvf54KCxC3WyNPw4hs59ktYl5_KrgJB24IKX2hWe2St30J1A'
+                avatarUrl: ffLogo
             },
-            message: text,
+            message: "is typing...",
             alignRight: false,
             isTyping: true
          }
 
-         setMessages(prevMessages => [...prevMessages, typingMessage]);
+         handleAddMessage(typingMessage)
 
         fetchData(text);
         setText("")
     };
 
     return (
-        <div className={classes.root}>
-            <MessageList messages={messages} />
+        <div className={darkMode ? 'chatContainer dark' : 'chatContainer'}>
+            <MessageList messages={currentMessages} />
             <ChatInput performSearch={performSearch} handleChange={handleChange} text={text} />   
         </div>
     );

@@ -1,29 +1,36 @@
-import logo from '../Assets/FF.png';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useContext }  from 'react';
+import ChatMenuEntry from './ChatMenuEntry';
+import serverIcon from '../Assets/server_icon.jpeg';
+import MessageType from '../Models/MessageType';
+import { ThemeContext } from '../Theme/ThemeProvider';
+import '../css/chatMenu.css';
 
-const useStyles = makeStyles((theme) => ({
-    chatMenu: {
-        height: '100vh - 40px',
-        width: '100px',
-        backgroundColor: 'white',
-        boxShadow: '2px 0 4px rgba(0, 0, 0, 0.2)',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '20px 0px'
-    },
-    logo: {
-        width: '60px',
-        height: '60px'
-    }
-}))
 
-const ChatMenu = () => {
-    
-    const classes = useStyles();
+const ChatMenu = ({ chatMessages, selectedServer, onChatMenuEntryClick }) => {
+
+    const { darkMode } = useContext(ThemeContext);
   
+    const stableMessages = chatMessages["Stable"].messages.filter(message => message.type === MessageType.TEXT)
+    const exploratoryMessages = chatMessages["Exploratory"].messages.filter(message => message.type === MessageType.TEXT)
+
+    const stableConfig = {
+        name: "Stable",
+        message: stableMessages[stableMessages.length - 1].message,
+        image: serverIcon,
+        selected: selectedServer === 'Stable'
+    }
+
+    const exploratoryConfig = {
+        name: "Exploratory",
+        message: stableMessages[exploratoryMessages.length - 1].message,
+        image: serverIcon,
+        selected: selectedServer === 'Exploratory'
+    }
+
     return (
-        <div className={classes.chatMenu}>
-            <img src={logo} alt="Logo" className={classes.logo} />
+        <div className={darkMode ? 'chatMenu dark' : 'chatMenu'}>
+            <ChatMenuEntry config={stableConfig} onClick={onChatMenuEntryClick} />
+            <ChatMenuEntry config={exploratoryConfig} onClick={onChatMenuEntryClick} />
         </div>
     );
 };

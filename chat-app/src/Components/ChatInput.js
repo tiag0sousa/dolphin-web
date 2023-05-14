@@ -7,17 +7,17 @@ const useStyles = makeStyles((theme) => ({
     chatInput: {
         position: 'sticky',
         bottom: 0,
-        padding: theme.spacing(2),
+        padding: '20px',
         display: 'flex',
         justifyContent: 'space-between',
       },
     input: {
-      color: "white",
+      color: "black",
       "&::placeholder": {
         textOverflow: "ellipsis !important",
         color: "lightgray"
       },
-      background: 'grey',
+      background: '#F2F3F7',
       borderRadius: '30px'
     }
   }));
