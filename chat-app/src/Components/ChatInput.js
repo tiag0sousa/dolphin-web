@@ -17,8 +17,12 @@ const useStyles = makeStyles((theme) => ({
         textOverflow: "ellipsis !important",
         color: "lightgray"
       },
+      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+        borderColor: "black"
+      },
       background: '#F2F3F7',
-      borderRadius: '30px'
+      borderRadius: '30px',
+      outlineColor: "#000000"
     }
   }));
 
