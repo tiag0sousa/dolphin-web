@@ -56,9 +56,6 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
                 sessionId: sessionIds[currentServer]
             }
 
-            console.log(currentServer)
-            console.log(data)
-
           const result = await sendMessage(data, currentServer);
 
           // Hide isTyping:
