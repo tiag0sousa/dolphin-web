@@ -1,5 +1,5 @@
-const chatStableEndpoint = "http://localhost:3001/chat/stable"
-const chatExploratoryEndpoint = "http://localhost:3001/chat/exploratory"
+const chatStableEndpoint = "https://dolphin-proxy.onrender.com/chat/stable"
+const chatExploratoryEndpoint = "https://dolphin-proxy.onrender.com/chat/exploratory"
 
 export const sendMessage = async (data, server) => {
 

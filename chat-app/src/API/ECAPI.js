@@ -1,4 +1,4 @@
-const searchEndpoint = "http://localhost:3001/searchProducts"
+const searchEndpoint = "https://dolphin-proxy.onrender.com/searchProducts"
 
 export const searchProducts = async (productIds) => {
 
