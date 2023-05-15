@@ -39,7 +39,7 @@ const ChatLine = ({ user, message, alignRight, isTyping }) => {
     <div className={classes.root} style={divStyle}>
       {!alignRight && <Avatar alt={user.name} src={user.avatarUrl} />}
       <Card className={alignRight ? classes.cardRight : classes.cardLeft}>
-        <CardContent style={{ paddingBottom: '16px' }}>
+        <CardContent style={{ paddingBottom: '16px', whiteSpace: 'pre-line' }}>
           
             {!isTyping && 
                 <Typography variant="body2">
