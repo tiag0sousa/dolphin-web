@@ -9,7 +9,7 @@ body {
   }
   
   .image-section {
-    background-image: url('../Assets/login.jpeg');
+    background-image: url('../Assets/login.webp');
     background-size: cover;
     background-position: center;
     width: calc(100% - 500px);

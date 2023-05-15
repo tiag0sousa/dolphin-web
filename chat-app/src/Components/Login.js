@@ -29,8 +29,7 @@ const Login = ({ handleLoginSuccess }) => {
 
     <div class="container">
         <div class="form-section">
-            <img class="icon" src={logo} />
-            <h1>FARFETCH Assistant</h1>
+            <h1>Welcome</h1>
             <form onSubmit={handleSubmit}>
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} required />
