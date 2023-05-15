@@ -6,7 +6,7 @@ import ChatContainer from './ChatContainer';
 import ffLogo from '../Assets/ff_logo.png';
 import MessageType from '../Models/MessageType';
 
-function RootComponent() {
+function RootComponent({ user, handleLogout }) {
 
   const { darkMode } = useContext(ThemeContext);
 
@@ -73,7 +73,7 @@ function RootComponent() {
 
   return (
     <div className={darkMode ? 'root dark' : 'root'}>
-        <NavBar />
+        <NavBar user={user} handleLogout={handleLogout} />
         <div className={darkMode ? 'content dark' : 'content'}>
           <ChatMenu 
             chatMessages={serverMessages} 
