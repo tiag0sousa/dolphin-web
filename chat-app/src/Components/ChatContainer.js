@@ -8,7 +8,7 @@ import ffLogo from '../Assets/ff_logo.png';
 import '../css/chatContainer.css';
 import { ThemeContext } from '../Theme/ThemeProvider';
 
-const ChatContainer = ({ chatMessages, currentServer, handleAddMessage, handleHideTyping }) => {
+const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessage, handleHideTyping }) => {
 
     const currentMessages = chatMessages[currentServer].messages
 
@@ -53,8 +53,11 @@ const ChatContainer = ({ chatMessages, currentServer, handleAddMessage, handleHi
 
             let data = {
                 message: textMessage,
-                sessionId: "123456"
+                sessionId: sessionIds[currentServer]
             }
+
+            console.log(currentServer)
+            console.log(data)
 
           const result = await sendMessage(data, currentServer);
 

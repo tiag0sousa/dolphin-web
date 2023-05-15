@@ -22,7 +22,7 @@ const ChatMenu = ({ chatMessages, selectedServer, onChatMenuEntryClick }) => {
 
     const exploratoryConfig = {
         name: "Exploratory",
-        message: stableMessages[exploratoryMessages.length - 1].message,
+        message: exploratoryMessages[exploratoryMessages.length - 1].message,
         image: serverIcon,
         selected: selectedServer === 'Exploratory'
     }

@@ -14,6 +14,11 @@ function RootComponent() {
     return Math.random().toString(36).substr(2, length);
   };
 
+  const [sessionIds, setSessionsIds] = useState({
+    'Stable': generateRandomString(10),
+    'Exploratory': generateRandomString(10)
+  });
+
   const [selectedServer, setSelectedServer] = useState('Stable');
   const [serverMessages, setServerMessages] = useState({
     'Stable': {
@@ -29,7 +34,7 @@ function RootComponent() {
           isTyping: false
        }
       ],
-      'sessionId': generateRandomString(10)
+      'sessionId': sessionIds["Stable"]
     },
     'Exploratory': {
       'messages': [
@@ -44,7 +49,7 @@ function RootComponent() {
           isTyping: false
        }
       ],
-      'sessionId': generateRandomString(10)
+      'sessionId': sessionIds["Exploratory"]
     }
   });
 
@@ -78,6 +83,7 @@ function RootComponent() {
           <ChatContainer 
             chatMessages={serverMessages} 
             currentServer={selectedServer}
+            sessionIds={sessionIds}
             handleAddMessage={handleAddMessage}
             handleHideTyping={handleHideTyping}/>
         </div>

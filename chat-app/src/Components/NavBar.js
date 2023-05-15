@@ -13,7 +13,7 @@ function NavBar() {
   return (
     <div className={darkMode ? 'navbar dark' : 'navbar'}>
         <img src={logo} alt="Logo" class="navbar-logo" />
-        <span>FARFETCH GPT</span>
+        <span>FARFETCH Assistant</span>
         <div class="navbar-items">
             <div class="navbar-item">
                 <IconButton 
