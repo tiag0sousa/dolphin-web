@@ -74,7 +74,7 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
             }
             handleAddMessage(message)
 
-          if (result.productIds !== undefined && result.productIds.length > 0) {
+          if (result.productIds !== undefined && result.productIds != null && result.productIds.length > 0) {
 
             fetchProducts(result.productIds)
           }
