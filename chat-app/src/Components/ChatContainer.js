@@ -19,38 +19,46 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
 
     const fetchProducts = async(productIds) => {
 
-        // Add typing:
-        let typingMessage = { 
-            type: MessageType.TEXT,
-            user: {
-                name: "FF",
-                avatarUrl: ffLogo
-            },
-            message: "is typing...",
-            alignRight: false,
-            isTyping: true
-         }
+        try {
+            // Add typing:
+            let typingMessage = { 
+                type: MessageType.TEXT,
+                user: {
+                    name: "FF",
+                    avatarUrl: ffLogo
+                },
+                message: "is typing...",
+                alignRight: false,
+                isTyping: true
+            }
 
-        handleAddMessage(typingMessage)
+            handleAddMessage(typingMessage)
 
-        const result = await searchProducts(productIds)
+            const result = await searchProducts(productIds)
 
-        // Hide is typing:
-        handleHideTyping()
+            // Hide is typing:
+            handleHideTyping()
 
-        let message = {
-            type: MessageType.PRODUCTS,
-            user: {
-                name: "FF",
-                avatarUrl: ffLogo
-            },
-            products: result.products.entries
+            let message = {
+                type: MessageType.PRODUCTS,
+                user: {
+                    name: "FF",
+                    avatarUrl: ffLogo
+                },
+                products: result.products.entries
+            }
+
+            handleAddMessage(message)
+
+            // Enable input:
+            handleInputLock(false)
+
+        } catch (e) {
+
+            handleHideTyping()
+            handleAddMessage(errorMessage());
+            handleInputLock(false)
         }
-
-        handleAddMessage(message)
-
-        // Enable input:
-        handleInputLock(false)
     };
 
     const fetchData = async (textMessage) => {
@@ -94,7 +102,9 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
 
         } catch (e) {
 
-          console.error(e);
+          handleHideTyping()
+          handleAddMessage(errorMessage());
+          handleInputLock(false)
         }
     };
 
@@ -140,6 +150,22 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
             setText("")
         }
     };
+
+    function errorMessage() {
+
+        let message = {
+            type: MessageType.TEXT,
+            user: {
+                name: "FF",
+                avatarUrl: ffLogo
+            },
+            message: "Apologies, but what you are looking for is currently unavailable. Please try again later.",
+            alignRight: false,
+            isTyping: false
+        }
+
+        return message
+    }
 
     return (
         <div className={darkMode ? 'chatContainer dark' : 'chatContainer'}>
