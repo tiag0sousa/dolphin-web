@@ -34,7 +34,8 @@ function RootComponent({ user, handleLogout }) {
           isTyping: false
        }
       ],
-      'sessionId': sessionIds["Stable"]
+      'sessionId': sessionIds["Stable"],
+      'waitingAnswer': false
     },
     'Exploratory': {
       'messages': [
@@ -49,7 +50,8 @@ function RootComponent({ user, handleLogout }) {
           isTyping: false
        }
       ],
-      'sessionId': sessionIds["Exploratory"]
+      'sessionId': sessionIds["Exploratory"],
+      'waitingAnswer': false
     }
   });
 

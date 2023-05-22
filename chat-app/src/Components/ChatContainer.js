@@ -5,6 +5,7 @@ import { sendMessage } from '../API/chatAPI';
 import { searchProducts } from '../API/ECAPI';
 import MessageType from '../Models/MessageType';
 import ffLogo from '../Assets/ff_logo.png';
+import userLogo from '../Assets/user_logo.png';
 import '../css/chatContainer.css';
 import { ThemeContext } from '../Theme/ThemeProvider';
 
@@ -29,7 +30,7 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
             isTyping: true
          }
 
-         handleAddMessage(typingMessage)
+        handleAddMessage(typingMessage)
 
         const result = await searchProducts(productIds)
 
@@ -96,7 +97,7 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
             type: MessageType.TEXT,
             user: {
                 name: "User",
-                avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBgZbchuTiUtA3Egi1arN4BEQeoTaUtutQ8A&usqp=CAU'
+                avatarUrl: userLogo
             },
             message: text,
             alignRight: true,
