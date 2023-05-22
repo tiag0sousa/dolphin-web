@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const ChatInput = ({ handleChange, performSearch, text}) => {
+const ChatInput = ({ handleChange, performSearch, text, isDisabled }) => {
 
   const classes = useStyles();
 
@@ -52,7 +52,9 @@ const ChatInput = ({ handleChange, performSearch, text}) => {
       <IconButton 
         style={{ padding: '0px 0px 0px 10px'}}
         onClick={performSearch} 
-        color="primary">
+        color="primary"
+        disabled={isDisabled}
+        >
             <ArrowCircleUpSharpIcon style={{ color: 'grey', fontSize: '50px' }} />
       </IconButton>
     </div>

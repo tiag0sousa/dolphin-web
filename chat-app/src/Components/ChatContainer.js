@@ -9,9 +9,10 @@ import userLogo from '../Assets/user_logo.png';
 import '../css/chatContainer.css';
 import { ThemeContext } from '../Theme/ThemeProvider';
 
-const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessage, handleHideTyping }) => {
+const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessage, handleHideTyping, handleInputLock }) => {
 
     const currentMessages = chatMessages[currentServer].messages
+    const inputDisabled = chatMessages[currentServer].waitingAnswer
 
     const [text, setText] = useState('');
     const { darkMode } = useContext(ThemeContext);
@@ -47,10 +48,16 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
         }
 
         handleAddMessage(message)
+
+        // Enable input:
+        handleInputLock(false)
     };
 
     const fetchData = async (textMessage) => {
         try {
+
+            // Disable input:
+            handleInputLock(true)
 
             let data = {
                 message: textMessage,
@@ -78,6 +85,11 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
           if (result.productIds !== undefined && result.productIds != null && result.productIds.length > 0) {
 
             fetchProducts(result.productIds)
+
+          } else {
+
+            // Enable input:
+            handleInputLock(false)
           }
 
         } catch (e) {
@@ -92,43 +104,47 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
 
     const performSearch = () => {
 
-        // Update UI:
-        let message = {
-            type: MessageType.TEXT,
-            user: {
-                name: "User",
-                avatarUrl: userLogo
-            },
-            message: text,
-            alignRight: true,
-            isTyping: false
+        // Only allow new search if input is enabled:
+        if (inputDisabled ===  false) {
+
+            // Update UI:
+            let message = {
+                type: MessageType.TEXT,
+                user: {
+                    name: "User",
+                    avatarUrl: userLogo
+                },
+                message: text,
+                alignRight: true,
+                isTyping: false
+            }
+
+            // Add message:
+            handleAddMessage(message)
+
+            // Add typing:
+            let typingMessage = { 
+                type: MessageType.TEXT,
+                user: {
+                    name: "FF",
+                    avatarUrl: ffLogo
+                },
+                message: "is typing...",
+                alignRight: false,
+                isTyping: true
+            }
+
+            handleAddMessage(typingMessage)
+
+            fetchData(text);
+            setText("")
         }
-
-        // Add message:
-        handleAddMessage(message)
-
-        // Add typing:
-        let typingMessage = { 
-            type: MessageType.TEXT,
-            user: {
-                name: "FF",
-                avatarUrl: ffLogo
-            },
-            message: "is typing...",
-            alignRight: false,
-            isTyping: true
-         }
-
-         handleAddMessage(typingMessage)
-
-        fetchData(text);
-        setText("")
     };
 
     return (
         <div className={darkMode ? 'chatContainer dark' : 'chatContainer'}>
             <MessageList messages={currentMessages} />
-            <ChatInput performSearch={performSearch} handleChange={handleChange} text={text} />   
+            <ChatInput performSearch={performSearch} handleChange={handleChange} text={text} isDisabled={inputDisabled} />   
         </div>
     );
   };

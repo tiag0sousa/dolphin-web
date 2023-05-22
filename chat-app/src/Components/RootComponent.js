@@ -66,6 +66,13 @@ function RootComponent({ user, handleLogout }) {
     setServerMessages(newServerMessages);
   };
 
+  const handleInputLock = (status) => {
+
+    let newServerMessages = {...serverMessages};
+    newServerMessages[selectedServer].waitingAnswer = status
+    setServerMessages(newServerMessages);
+  }
+
   const handleHideTyping = () => {
 
     let newServerMessages = {...serverMessages};
@@ -87,7 +94,8 @@ function RootComponent({ user, handleLogout }) {
             currentServer={selectedServer}
             sessionIds={sessionIds}
             handleAddMessage={handleAddMessage}
-            handleHideTyping={handleHideTyping}/>
+            handleHideTyping={handleHideTyping}
+            handleInputLock={handleInputLock}/>
         </div>
     </div>
   );
