@@ -18,7 +18,7 @@ app.post('/chat/stable', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).send(error);
+        res.status(error.response.status).send(error);
       }
 
 });
@@ -34,7 +34,7 @@ app.post('/chat/exploratory', async (req, res) => {
 
 } catch (error) {
     console.error(error);
-    res.status(500).send(error);
+    res.status(error.response.status).send(error);
   }
 });
 
@@ -81,7 +81,7 @@ app.post('/searchProducts', async (req, res) => {
 
     } catch (error) {
       console.error(error);
-      res.status(500).send(error);
+      res.status(error.response.status).send(error);
     }
 });
 
