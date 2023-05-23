@@ -18,7 +18,7 @@ app.post('/chat/stable', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error accessing external API -> ChatAPI stable');
+        res.status(500).send(error);
       }
 
 });
@@ -34,7 +34,7 @@ app.post('/chat/exploratory', async (req, res) => {
 
 } catch (error) {
     console.error(error);
-    res.status(500).send('Error accessing external API -> ChatAPI exploratory');
+    res.status(500).send(error);
   }
 });
 
@@ -81,7 +81,7 @@ app.post('/searchProducts', async (req, res) => {
 
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error accessing external API -> ECAPI');
+      res.status(500).send(error);
     }
 });
 

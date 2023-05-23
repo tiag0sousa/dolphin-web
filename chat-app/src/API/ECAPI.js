@@ -2,6 +2,8 @@ const searchEndpoint = "https://dolphin-proxy.onrender.com/searchProducts"
 
 export const searchProducts = async (productIds) => {
 
+    console.log("🚀 Request: " + searchEndpoint)
+
     const response = await fetch(searchEndpoint, {
         method: 'POST',
         headers: {
@@ -14,8 +16,12 @@ export const searchProducts = async (productIds) => {
         body: JSON.stringify({ 'productIds': productIds })
     });
 
+    console.log("⬇️ Response:")
+    console.log(response)
+
     if(!response.ok) {
-        throw new Error('HTTP error! status $(response.status)')
+        const errorMessage = `code ${response.status}`
+        throw new Error(errorMessage)
     }
 
     return await response.json()

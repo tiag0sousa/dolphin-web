@@ -56,7 +56,7 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
         } catch (e) {
 
             handleHideTyping()
-            handleAddMessage(errorMessage());
+            handleAddMessage(errorMessage(e));
             handleInputLock(false)
         }
     };
@@ -103,7 +103,7 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
         } catch (e) {
 
           handleHideTyping()
-          handleAddMessage(errorMessage());
+          handleAddMessage(errorMessage(e));
           handleInputLock(false)
         }
     };
@@ -151,7 +151,7 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
         }
     };
 
-    function errorMessage() {
+    function errorMessage(error) {
 
         let message = {
             type: MessageType.TEXT,
@@ -159,7 +159,7 @@ const ChatContainer = ({ chatMessages, currentServer, sessionIds, handleAddMessa
                 name: "FF",
                 avatarUrl: ffLogo
             },
-            message: "Apologies, but what you are looking for is currently unavailable. Please try again later.",
+            message: "Apologies, but what you are looking for is currently unavailable. Please try again later.\n" + error,
             alignRight: false,
             isTyping: false
         }
