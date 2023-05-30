@@ -63,7 +63,7 @@ app.post('/searchProducts', async (req, res) => {
 
       const productIds = req.body.productIds
 
-      const url = 'https://api.farfetch.net/v1/search/products?sort=requestProductsIds&fields=gender,brand,quantity,priceWithoutDiscount,labels,promotionPercentage,id,categories,currencyIsoCode,images,merchantId,price,shortDescription,priceType,tag,type&page=1&contextFilters=priceType:0&categories=ne:141257&imagesSizes=480&pageSize=40&id=' + productIds
+      const url = 'https://api.farfetch.net/v1/search/products?sort=requestProductsIds&fields=gender,brand,quantity,priceWithoutDiscount,labels,promotionPercentage,id,categories,currencyIsoCode,images,merchantId,price,shortDescription,priceType,tag,type&page=1&contextFilters=priceType:0,1,2,3&categories=ne:141257&imagesSizes=480&pageSize=40&id=' + productIds
       
       const response = await axios
           .get(url, {
